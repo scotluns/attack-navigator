@@ -1,14 +1,14 @@
-name: Jasmine Tests
+name: CI
 
 on:
   push:
     branches: ["develop"]
   pull_request:
     branches: ["master", "develop"]
-    types: [synchronize]
 
 jobs:
-  run-tests:
+  quality-gate:
+    name: Quality gate
     runs-on: ubuntu-latest
     defaults:
        run:
@@ -29,6 +29,9 @@ jobs:
 
     - name: Run Jasmine tests
       run: npm run test -- --code-coverage --no-watch --browsers ChromeHeadlessCI
+
+    - name: Verify production build
+      run: npm run build -- --configuration production --aot=false
 
     - name: Archive code coverage results
       uses: actions/upload-artifact@v4
