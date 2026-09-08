@@ -2,9 +2,6 @@ name: Build and Publish Docker Image
 
 on:
   push:
-    branches:
-      - 'master'
-      - 'develop'
     tags:
       - 'v*.*.*'
 
@@ -21,10 +18,6 @@ jobs:
           images: |
             ghcr.io/mitre-attack/attack-navigator
           tags: |
-            # set latest tag for master branch
-            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'master') }}
-            # set develop tag for develop branch
-            type=ref,event=branch,enable=${{ github.ref == format('refs/heads/{0}', 'develop') }}
             # set semver tag (vX.Y.Z) on git tag event
             type=semver,pattern=v{{major}}.{{minor}}.{{patch}}
             # set git short commit as Docker tag (e.g., sha-ad132f5)
