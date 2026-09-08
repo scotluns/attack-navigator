@@ -30,7 +30,7 @@ jobs:
         run: npm ci
 
       - name: Build Navigator
-        run: npm run build -- --configuration production,googleAnalytics --aot=false --base-href=https://mitre-attack.github.io/attack-navigator/
+        run: npm run build -- --configuration production,googleAnalytics --aot=false --base-href=https://scotluns.github.io/attack-navigator/
 
       - name: Download and extract Navigator v2
         uses: robinraju/release-downloader@v1.10
